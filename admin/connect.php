@@ -1,14 +1,18 @@
 <?php
-//data source name = dsn
-$dsn = "localhost";
-$user = "root";
-$pass = "";
+//connecting via PDO
+$dsn = 'mysql:host=localhost;dbname=shop';
+$user= 'root';
+$pass= '';
+$option = array(
+  PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
+);
 
-// Create connection
-$con = new mysqli($dsn, $user, $pass);
-
-// Check connection
-if ($con->connect_error) {
-  die("Connection failed: " . $con->connect_error);
+try {
+  $con = new PDO ($dsn, $user, $pass, $option);
+  $con -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  
 }
-echo "";
+
+catch(PDOException $e){
+  echo '<h1 style="color:red">' . "failed to connect to DB" . '</h1>' . $e->getMessage();
+}
