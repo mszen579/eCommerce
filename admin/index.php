@@ -1,8 +1,18 @@
 <!-- we use this built-in function "include" to include /templates/header.php, and other php files in each page -->
 <?php 
+//always start with session 
+session_start();
+//excluding NAVBAR using variable
+$noNavbar = '';
+
+if(isset($_SESSION['username'])){
+     //location:dashboard.php is route => should forward the user after logging in to another page Ex. dashboard.php
+     header ('location: dashboard.php');
+}
+//to check the session you can use print_r function
+//print_r($_SESSION);
 include "init.php";
-include $tpl . 'header.php';
-include 'includes/languages/english.php';
+
 
 //check if the user is coming from the http request NOT directly going to the page
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -20,7 +30,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     //echo $count;
 
     if($count>0){
-        echo '<h3 style="color:red;">' . 'welcome: ' . $username . '</h1>';
+        //echo '<h3 style="color:red;">' . 'welcome: ' . $username . '</h1>';
+        $_SESSION['username'] = $username; // logged in user session
+        // header ('location: dashboard.php');
+        exit();//to prevent any error
     }
     else{
         echo '<h3 style="color:red;">'. ' Sorry we do not have any admin with this username and password ' . '</h1>';
