@@ -8,9 +8,16 @@
     <!-- this is font awesome link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <!-- including css file  -->
+    <link rel="stylesheet" href="layout/css/backend.css">
+
+    <!-- including jquery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <!-- this is utf  -->
     <meta charset="UTF-8"  />
     <title>Admin</title>
+  
 </head>
 <body>
-<div>this is header</div>
+

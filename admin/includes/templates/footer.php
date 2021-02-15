@@ -1,6 +1,9 @@
     <div class="footer">
-        This is footer
+    
     </div>
+    <!-- <script src="layout/js/backend.js"></script> -->
+    <script type="text/javascript" src="layout/js/backend.js"></script>
+
 </body>
-<script src='layout/js/backend.js'></script>
+
 </html>
