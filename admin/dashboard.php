@@ -5,7 +5,8 @@ if(isset($_SESSION['username'])){
 
     include 'init.php';
 
-echo 'welcome';
+    echo 'welcome ';
+
     include $tpl . "footer.php";
 }else{
     // echo 'Your are not authorized to view this page';
