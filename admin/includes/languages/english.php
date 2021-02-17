@@ -7,12 +7,11 @@ function lang($phrase){
 
     //dashboard words:
 
-        "HOME_ADMIN"    => "Admin area",
+        "HOME_ADMIN"    => "Home",
         "Edit profile"  => "Edit Profile",
         "Sittings"      => "Edit Sittings",
         "Logout"        => "Log out",
         "Categories"    => "Categories",
-        "Home"          => "Home",
         "Options"       => "Options",
         "Items"         => 'Items',
         "Members"       => 'Members',

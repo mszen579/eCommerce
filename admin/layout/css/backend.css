@@ -1,6 +1,7 @@
 /* start main rules  */
 body{
     background-color: #f4f4f4;
+    font-size: 16px;
 }
 
 
@@ -34,3 +35,36 @@ body{
 }
 
 /* End login form */
+
+
+/* Start navbar bootstrap edit */
+
+.bg-light  {
+    border-radius: 0;
+    margin-bottom: 0;
+  
+}
+
+.nav-link{
+    padding:15px 12px;
+}
+
+
+.navbar-brand{
+   font-size: 1em;
+   padding:15px 12px;
+   margin: 0px 0px 0px 0px;
+}
+
+
+.show , .nav-link{
+ background-color:#add8e6;
+ box-shadow: red;
+}
+
+.nav-link, .navbarDropdownMenuLink{
+    background-color:#F8F9FA;
+   
+}
+
+/* END navbar bootstrap edit */
