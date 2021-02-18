@@ -11,16 +11,14 @@ which will help us use this code for link params with CRUD
 //     $do = 'manage';
 // };
 
-//you can write the above code in the if modern way
+//you can write the above if condition in a modern way "CONDITION ? TRUE : FALSE"
+// in case you type in the browser */page.php?blabla=blabla for example => you will be directed to manage page and be requested to go to link to add a new categories
+$do = isset($_GET['do']) ? $_GET['do'] : 'manage';
 
-$do = isset($_GET['do'])? $do = $_GET['do'] : $do = 'manage';
-
-//if the page is main page
-
-
-if ($do == 'main'){
-    echo 'welcome to add main';
-    echo 'add new category by following the below link: <a href="/page.php/do=add">Add Category</a>'
+//if the page is manage page
+if ($do == 'manage'){
+    echo 'welcome to manage page<br>';
+    echo 'add new category by following the below link: <a href="page.php?do=add">Add Category</a>';
 }
 elseif($do == 'edit'){
     echo 'welcome to edit page';
@@ -29,5 +27,5 @@ elseif($do == 'add'){
     echo 'welcome to add page';
 }
 else{
-    echo '<h1>ERROR there is no page with this name</h1>';
+    echo "<strong>ERROR there is no page with this name";
 }
