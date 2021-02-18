@@ -9,7 +9,7 @@ function lang($phrase){
 
         "HOME_ADMIN"    => "Home",
         "Edit profile"  => "Edit Profile",
-        "Sittings"      => "Edit Sittings",
+        "Sittings"      => "Sittings",
         "Logout"        => "Log out",
         "Categories"    => "Categories",
         "Options"       => "Options",

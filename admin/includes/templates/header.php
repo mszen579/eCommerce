@@ -18,7 +18,8 @@
     <meta charset="UTF-8"  />
 
     <!-----page title--------->
-    <title>Admin</title>
+    <!-- I have embed a dynamic name from functions.php  -->
+    <title><?php getTitle() ?></title>
   
 </head>
 <body>

@@ -7,11 +7,14 @@ include 'connect.php';// to connect to db
 
 //routes
 $tpl =  'includes/templates/';  //the routes for templates directory
+$lang = 'includes/languages/'; //language directory
+$func = 'includes/functions/'; //include function directory
 $css =  'layout/css/';//css directory 
 $js =   'layout/js/';//java script directory
-$lang = 'includes/languages/'; //language directory
 
-//include important files
+
+//include important files after allocate the route for it
+include $func . 'functions.php';//
 include $lang . 'english.php';//including english language
 include $tpl . 'header.php';//including header
 

@@ -2,9 +2,11 @@
 //always start with session 
 session_start();
 if(isset($_SESSION['username'])){
-
+    $pageTitle = 'Dashboard';
     include 'init.php';
-    echo '<h4>Welcome to dashboard';
+
+    // to display the user session
+    print_r($_SESSION);
     include $tpl . "footer.php";
 
 }else{

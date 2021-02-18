@@ -4,6 +4,8 @@
 session_start();
 //excluding NAVBAR using variable
 $noNavbar = '';
+//including a function from functions.php for page title
+$pageTitle = 'login';
 
 if(isset($_SESSION['username'])){
      //location:dashboard.php is route => should forward the user after logging in to another page Ex. dashboard.php
@@ -23,16 +25,28 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 // Check if the user exist in the DB using statement variable =$stmt
 
-    $stmt = $con->prepare('SELECT username, password FROM users WHERE username=? AND password=? AND groupid=1');
+    $stmt = $con->prepare('SELECT
+                                userid, username, password 
+                           FROM 
+                                users 
+                           WHERE 
+                                username=? 
+                           AND 
+                                password=? 
+                           AND 
+                                groupid=1
+                           LIMIT 1');
     $stmt -> execute(array($username, $hashedPass));
+    // we need to fetch the logged in user to allow use to edit his information 
+    $row = $stmt -> fetch();
     $count = $stmt->rowCount();
 
     //echo $count;
 
     if($count>0){
-        //echo '<h3 style="color:red;">' . 'welcome: ' . $username . '</h1>';
-        $_SESSION['username'] = $username; // logged in user session
-        // header ('location: dashboard.php');
+        $_SESSION['username'] = $username;      // logged in user session and register it
+        $_SESSION['ID'] = $row['userid'];   // Register session for userid
+        header ('location: dashboard.php');
         exit();//to prevent any error
     }
     else{

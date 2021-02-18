@@ -21,7 +21,8 @@
 
 
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="#"><?php echo lang("Edit profile")?></a></li>
+            <!-- we had to edit the link so it will collect the userid and the action to be do=edit -->
+            <li><a class="dropdown-item" href='members.php?do=Edit&userid=<?php echo $_SESSION['ID']?>'><?php echo lang("Edit profile")?></a></li>
             <li><a class="dropdown-item" href="#"><?php echo lang("Sittings")?></a></li>
             <li><a class="dropdown-item" href="logout.php"><?php echo lang("Logout")?></a></li>
           </ul>
