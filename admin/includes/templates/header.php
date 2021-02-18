@@ -16,6 +16,8 @@
 
     <!-- this is utf  -->
     <meta charset="UTF-8"  />
+
+    <!-----page title--------->
     <title>Admin</title>
   
 </head>

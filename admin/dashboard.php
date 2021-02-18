@@ -4,10 +4,9 @@ session_start();
 if(isset($_SESSION['username'])){
 
     include 'init.php';
-
-    echo 'welcome ';
-
+    echo '<h4>Welcome to dashboard';
     include $tpl . "footer.php";
+
 }else{
     // echo 'Your are not authorized to view this page';
 

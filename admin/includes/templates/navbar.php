@@ -23,7 +23,7 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="#"><?php echo lang("Edit profile")?></a></li>
             <li><a class="dropdown-item" href="#"><?php echo lang("Sittings")?></a></li>
-            <li><a class="dropdown-item" href="#"><?php echo lang("Logout")?></a></li>
+            <li><a class="dropdown-item" href="logout.php"><?php echo lang("Logout")?></a></li>
           </ul>
 
           
