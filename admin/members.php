@@ -1,4 +1,6 @@
 <?php
+// echo the current error reporting level
+
 
 /*
 - Manage members
@@ -41,8 +43,10 @@ if(isset($_SESSION['username'])){
         if($stmt->rowCount() > 0){?>      
             <!-- starting html to add a form -->
             <h1 class='text-center'>Edit Member</h1>
-            <div class="container">
-            <form>
+        <div class="container">
+            <form class='form-horizontal' action='?do=update' method='POST'>
+            <!-- inorder to update a specific user we need to select a specific ID for that user so we will send it via a hidden input -->
+            <input type="hidden" name='userid' value="<?php echo $userid ?>">
             <!--  start add username -->
             <div class="form-group row">
             <label  class="col-sm-2 col-form-label">username</label>
@@ -88,16 +92,38 @@ if(isset($_SESSION['username'])){
             <!--  End add Submit -->
             
             </form>
-            </div>
+        </div>
         <?php    
         }else{
             echo 'there is on such user to edit';
         }?>
-            
-    
-
 <?php
    }
+
+    elseif($do == 'update'){//update page
+      // starting html to add a form
+            echo "<h1 class='text-center'>Update Member</h1>";
+
+      //Security: checking if the user coming from a POST request
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        //get the variables from the POST
+            $id         = $_POST['userid'];
+            $user       = $_POST['username'];
+            $email      = $_POST['email'];
+            $fullname   = $_POST['fullname'];
+
+        //update in database with the above info
+        $stmt = $con->prepare("UPDATE users SET username = ?, email = ?, fullname = ? WHERE userid = ?");
+        $stmt -> execute(array($user, $email, $fullname, $id));
+
+        //echo success message
+        echo $stmt -> rowCount() . ' ' . 'record updated';
+
+      }else{
+          echo 'you can not browse this page directly';
+      }
+    };
+
     include $tpl . "footer.php";
 
     }else{
@@ -105,3 +131,6 @@ if(isset($_SESSION['username'])){
         header ('location: index.php'); //route
         exit();
     }
+
+  
+
