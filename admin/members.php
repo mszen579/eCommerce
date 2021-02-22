@@ -20,6 +20,7 @@ $pageTitle = 'Members';
 if(isset($_SESSION['username'])){
 
     include 'init.php';
+    
 
     // like what we have done in the page.php page
     $do = isset($_GET['do']) ? $_GET['do'] : 'manage';
@@ -60,7 +61,8 @@ if(isset($_SESSION['username'])){
             <div class="form-group row">
             <label  class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10 col-md-8">
-            <input type="password" name='password' class="form-control"  placeholder="Password" autocomplete='new-password'>
+            <input type="hidden" name='oldpassword' class="form-control" value="<?php echo $row['password'];?>">
+            <input type="password" name='newpassword' class="form-control"  placeholder="Password" autocomplete='new-password'>
             </div>
             </div><br>
             <!--  End add Password -->
@@ -112,13 +114,21 @@ if(isset($_SESSION['username'])){
             $email      = $_POST['email'];
             $fullname   = $_POST['fullname'];
 
+        //password trick
+        $password = '';
+        //if the password did not change send the old password
+        if(empty($_POST['newpassword'])){
+            $password = $_POST['oldpassword'];
+        }
+        else{ $password = sha1($_POST['newpassword']);}//else send the new password
+
         //update in database with the above info
-        $stmt = $con->prepare("UPDATE users SET username = ?, email = ?, fullname = ? WHERE userid = ?");
-        $stmt -> execute(array($user, $email, $fullname, $id));
-
+        $stmt = $con->prepare("UPDATE users SET username = ?, email = ?, fullname = ?, password=? WHERE userid = ?");
+        $stmt -> execute(array($user, $email, $fullname, $password, $id));
+        
         //echo success message
-        echo $stmt -> rowCount() . ' ' . 'record updated';
-
+        echo $stmt -> rowCount() . ' ' . 'record updated' ;
+       
       }else{
           echo 'you can not browse this page directly';
       }
