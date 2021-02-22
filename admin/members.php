@@ -103,9 +103,12 @@ if(isset($_SESSION['username'])){
    }
 
     elseif($do == 'update'){//update page
+
+    
+
       // starting html to add a form
             echo "<h1 class='text-center'>Update Member</h1>";
-
+            echo "<div class='container'>";
       //Security: checking if the user coming from a POST request
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         //get the variables from the POST
@@ -154,20 +157,26 @@ if(isset($_SESSION['username'])){
         }
 
         foreach($formErrors as $error){
-            echo '<span style="color:red;">' . $error . '</span>'. '<br>' ;
+            echo '<p class="alert alert-danger">' . $error . '</p>'. '<br>' ;
         }
         
-        //update in database with the above info
-        $stmt = $con->prepare("UPDATE users SET username = ?, email = ?, fullname = ?, password=? WHERE userid = ?");
-        $stmt -> execute(array($user, $email, $fullname, $password, $id));
-        
-        //echo success message
-        echo $stmt -> rowCount() . ' ' . 'record updated' ;
-       
+        //prevent updating IF there is an error
+        if(empty($formErrors)){
+            //update in database with the above info
+            $stmt = $con->prepare("UPDATE users SET username = ?, email = ?, fullname = ?, password=? WHERE userid = ?");
+            $stmt -> execute(array($user, $email, $fullname, $password, $id));
+
+            //echo success message
+            echo '<div class="alert alert-success">'. $stmt -> rowCount() . ' ' . 'record updated' . '<div>' ;
+        }
+          
       }else{
           echo 'you can not browse this page directly';
       }
     };
+
+    //end styling
+    echo '</div>';  
 
     include $tpl . "footer.php";
 
