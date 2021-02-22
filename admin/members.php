@@ -117,11 +117,46 @@ if(isset($_SESSION['username'])){
         //password trick
         $password = '';
         //if the password did not change send the old password
-        if(empty($_POST['newpassword'])){
-            $password = $_POST['oldpassword'];
-        }
-        else{ $password = sha1($_POST['newpassword']);}//else send the new password
+        // if(empty($_POST['newpassword'])){
+        //     $password = $_POST['oldpassword'];
+        // }
+        // else{ $password = sha1($_POST['newpassword']);}//else send the new password
 
+        $password = empty($_POST['newpassword']) ? $_POST['oldpassword'] : sha1($_POST['newpassword']);
+        
+
+        //validate the form
+        $formErrors = array();
+
+        if(strlen($user)<3){
+            //echo 'username can not be empty';
+            $formErrors[] = 'username can not be less than 3 characters';
+        }elseif(strlen($user)>15){
+            $formErrors[] = 'username can not be bigger than 15 characters';
+            // prevent special characters
+        }elseif(preg_match("/([%\$#\*]+)/", $user)){
+            $formErrors[] = 'username can not have special characters';
+        }
+
+        if(empty($user)){
+            //echo 'username can not be empty';
+            $formErrors[] = 'username can not be empty';
+        }
+        if(empty($fullname)){
+            //echo 'fullname can not be empty';
+            $formErrors[] = 'fullname can not be empty';
+        }elseif(preg_match("/([%\$#\*]+)/", $fullname)){
+            $formErrors[] = 'fullname can not have special characters';
+        }
+        if(empty($email)){
+           //echo 'email can not be empty';
+           $formErrors[] = 'email can not be empty';
+        }
+
+        foreach($formErrors as $error){
+            echo '<span style="color:red;">' . $error . '</span>'. '<br>' ;
+        }
+        
         //update in database with the above info
         $stmt = $con->prepare("UPDATE users SET username = ?, email = ?, fullname = ?, password=? WHERE userid = ?");
         $stmt -> execute(array($user, $email, $fullname, $password, $id));
